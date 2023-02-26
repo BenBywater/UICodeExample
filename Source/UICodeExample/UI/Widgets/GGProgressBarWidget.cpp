@@ -3,12 +3,18 @@
 #include <Materials/MaterialInstanceDynamic.h>
 #include "../ViewModels/GGViewModel.h"
 
-#pragma optimize("", off)
-void UGGProgressBarWidget::Tick(FGeometry MyGeometry, float InDeltaTime)
+void UGGProgressBarWidget::SetProgressBar(float inPercentage)
 {
-	Super::Tick(MyGeometry, InDeltaTime);
+	currentPercentage = inPercentage;
+	if (UMaterialInstanceDynamic* material = progressBar->GetDynamicMaterial())
+	{
+		material->SetScalarParameterValue("FirstBar", currentPercentage);
+	}
+}
 
-	if (UMaterialInstanceDynamic* material = ProgressBar->GetDynamicMaterial())
+void UGGProgressBarWidget::BlueprintTick(float InDeltaTime)
+{
+	if (UMaterialInstanceDynamic* material = progressBar->GetDynamicMaterial())
 	{
 		float currentSecondBar = 0.f;
 
@@ -17,18 +23,8 @@ void UGGProgressBarWidget::Tick(FGeometry MyGeometry, float InDeltaTime)
 		float healthDiff = currentSecondBar - currentPercentage;
 		if (healthDiff > 0)
 		{
-			float lerpVal = FMath::Lerp(currentSecondBar, currentPercentage, 0.01f);
+			float lerpVal = FMath::Lerp(currentSecondBar, currentPercentage, InDeltaTime * lerpMultiplyer);
 			material->SetScalarParameterValue("SecondBar", lerpVal);
 		}
-	}
-}
-#pragma optimize("", on)
-
-void UGGProgressBarWidget::SetProgressBar(float inPercentage)
-{
-	currentPercentage = inPercentage;
-	if (UMaterialInstanceDynamic* material = ProgressBar->GetDynamicMaterial())
-	{
-		material->SetScalarParameterValue("FirstBar", currentPercentage);
 	}
 }
