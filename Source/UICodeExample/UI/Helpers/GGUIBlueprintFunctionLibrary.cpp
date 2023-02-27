@@ -5,6 +5,7 @@
 #include "UICodeExample/UI/Bindables/FloatBindable.h"
 #include "UICodeExample/UI/Bindables/ProgressBarBindable.h"
 #include "UICodeExample/UI/Widgets/GGProgressBarWidget.h"
+#include "UICodeExample/UI/Bindables/TextBindable.h"
 
 
 void UGGUIBlueprintFunctionLibrary::OpenScene(UObject* WorldContextObject, SceneEnum scene, UUISceneDataPayload* sceneDataPayload)
@@ -32,6 +33,14 @@ void UGGUIBlueprintFunctionLibrary::BindFloatBindable(UPARAM(ref)FFloatBindable&
 		inBinding.SetFloatDataBinding(inTextBlock);
 	}
 	//Log Error
+}
+
+void UGGUIBlueprintFunctionLibrary::BindTextBindable(FTextBindable& inBinding, UTextBlock* inTextBlock)
+{
+	if (inTextBlock)
+	{
+		inBinding.SetTextDataBinding(inTextBlock);
+	}
 }
 
 void UGGUIBlueprintFunctionLibrary::BindProgressBarBindable(FProgressBarBindable& inBinding, UGGProgressBarWidget* inProgressBar)

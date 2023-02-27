@@ -25,5 +25,8 @@ public:
     static void BindFloatBindable(UPARAM(ref)FFloatBindable& inBinding, UTextBlock* inTextBlock);
 
     UFUNCTION(BlueprintCallable, Category="Bindables")
+    static void BindTextBindable(UPARAM(ref)FTextBindable& inBinding, UTextBlock* inTextBlock);
+
+    UFUNCTION(BlueprintCallable, Category="Bindables")
     static void BindProgressBarBindable(UPARAM(ref)FProgressBarBindable& inBinding, UGGProgressBarWidget* inProgressBar);
 };
