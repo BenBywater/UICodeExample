@@ -1,6 +1,5 @@
 #include "GGTitleMenuSceneWidget.h"
 #include "UICodeExample/UI/ViewModels/GGSceneViewModel.h"
-#include "UICodeExample/UI/ViewModels/GGProgressBarViewModel.h"
 
 void UGGTitleMenuSceneWidget::SetDataContext(UGGViewModel* inViewModel)
 {
@@ -22,7 +21,7 @@ void UGGTitleMenuSceneWidget::NativeTick(const FGeometry& MyGeometry, float InDe
 	{
 		if (playerController->IsInputKeyDown(EKeys::AnyKey))
 		{
-			Exit();
+			ExitScene();
 		}
 	}
 }
