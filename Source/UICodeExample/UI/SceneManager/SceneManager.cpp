@@ -29,7 +29,7 @@ void UGGSceneManager::OpenScene(SceneEnum scene, UUISceneDataPayload* sceneDataP
 	const UUIDataSettings* uiDataSettings = GetDefault<UUIDataSettings>();
 	if (uiDataSettings && sceneManager)
 	{
-		UUISceneData* data = uiDataSettings->UUISceneDataPath.LoadSynchronous();
+		UUISceneData* data = uiDataSettings->UISceneDataPath.LoadSynchronous();
 
 		if (FUISceneTypeData* sceneTypeData = data->sceneData.Find(scene))
 		{
