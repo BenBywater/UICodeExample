@@ -21,7 +21,12 @@ void AGGPlayerController::PlayerFireGun()
 
 void AGGPlayerController::OpenTitleMenu()
 {
-
+	UWorld* world = GetWorld();
+	UUISceneDataPayload* payload = NewObject<UUISceneDataPayload>();
+	if (world && payload)
+	{
+		UIHelpers::OpenScene(world, SceneEnum::Title, payload);
+	}
 }
 
 void AGGPlayerController::OpenMainMenu()

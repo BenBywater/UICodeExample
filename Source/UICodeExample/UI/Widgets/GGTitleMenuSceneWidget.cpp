@@ -1,4 +1,5 @@
 #include "GGTitleMenuSceneWidget.h"
+#include "UICodeExample/PlayerController/GGPlayerController.h"
 #include "UICodeExample/UI/ViewModels/GGSceneViewModel.h"
 
 void UGGTitleMenuSceneWidget::SetDataContext(UGGViewModel* inViewModel)
@@ -11,17 +12,26 @@ void UGGTitleMenuSceneWidget::SetDataContext(UGGViewModel* inViewModel)
 	}
 }
 
-void UGGTitleMenuSceneWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
+FReply UGGTitleMenuSceneWidget::NativeOnKeyDown(const FGeometry& InGeometry, const FKeyEvent& InKeyEvent)
 {
-	Super::NativeTick(MyGeometry, InDeltaTime);
+	Super::NativeOnKeyDown(InGeometry, InKeyEvent);
 
 	UWorld* world = GetWorld();
-	APlayerController* playerController = world->GetFirstPlayerController();
+	AGGPlayerController* playerController = Cast<AGGPlayerController>(world->GetFirstPlayerController());
 	if (playerController)
 	{
-		if (playerController->IsInputKeyDown(EKeys::AnyKey))
-		{
-			ExitScene();
-		}
+		playerController->OpenMainMenu();
+	}
+	ExitScene();
+	return FReply::Handled();
+}
+
+void UGGTitleMenuSceneWidget::OnAnimationFinished_Implementation(const UWidgetAnimation* Animation)
+{
+	Super::OnAnimationFinished_Implementation(Animation);
+
+	if (IdleAnimation == Animation)
+	{
+		PlayAnimation(IdleAnimation);
 	}
 }
