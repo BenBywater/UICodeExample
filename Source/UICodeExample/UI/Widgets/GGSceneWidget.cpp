@@ -38,11 +38,11 @@ void UGGSceneWidget::OnAnimationFinished_Implementation(const UWidgetAnimation* 
 	
 	if (EnterSceneAnimation == Animation)
 	{
-		EnterAnimationFinishedDelegate.ExecuteIfBound(this);
+		EnterAnimationFinishedDelegate.Broadcast(this);
 	}
 	else if (ExitSceneAnimation == Animation)
 	{
-		CloseAnimationFinishedDelegate.ExecuteIfBound(this);
+		CloseAnimationFinishedDelegate.Broadcast(this);
 	}
 }
 
@@ -59,7 +59,7 @@ void UGGSceneWidget::EnterScene()
 	}
 	else
 	{
-		EnterAnimationFinishedDelegate.ExecuteIfBound(this);
+		EnterAnimationFinishedDelegate.Broadcast(this);
 	}
 }
 
@@ -71,6 +71,6 @@ void UGGSceneWidget::ExitScene()
 	}
 	else
 	{
-		CloseAnimationFinishedDelegate.ExecuteIfBound(this);
+		CloseAnimationFinishedDelegate.Broadcast(this);
 	}
 }

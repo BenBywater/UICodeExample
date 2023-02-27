@@ -16,7 +16,7 @@ enum class SceneInputModeEnum : uint8
 	GameOnly
 };
 
-DECLARE_DELEGATE_OneParam(FOnSceneAnimationFinished, UGGSceneWidget* /* CloseScene */)
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnSceneAnimationFinished, UGGSceneWidget* /* CloseScene */)
 
 UCLASS(Abstract)
 class UICODEEXAMPLE_API UGGSceneWidget : public UGGUserWidget
