@@ -22,6 +22,12 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void PlayerFireGun();
 
+	UFUNCTION(BlueprintCallable)
+	void OpenTitleMenu();
+
+	UFUNCTION(BlueprintCallable)
+	void OpenMainMenu();
+
 private:
 	float playerHealth = 1.f;
 	float playerAmmoCount = 10.f;
