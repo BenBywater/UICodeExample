@@ -7,6 +7,7 @@
 
 class UGGSceneManagerWidget;
 class UUISceneDataPayload;
+class UGGSceneWidget;
 
 UCLASS()
 class UICODEEXAMPLE_API UGGSceneManager : public UObject
@@ -18,6 +19,9 @@ public:
 
 	void OpenScene(SceneEnum scene, UUISceneDataPayload* sceneDataPayload);
 	void CloseScene();
+	void CloseAllScenes();
+	UGGSceneWidget* GetCurrentSceneWidget() const;
+	int32 GetSceneStackCount() const;
 private:
 	UPROPERTY()
 	UGGSceneManagerWidget* sceneManager = nullptr;

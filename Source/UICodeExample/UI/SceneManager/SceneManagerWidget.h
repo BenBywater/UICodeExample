@@ -14,6 +14,9 @@ class UICODEEXAMPLE_API UGGSceneManagerWidget : public UUserWidget
 public:
 	void PushScene(UGGSceneWidget* newScene);
 	void PopScene();
+	void PopAllScenes();
+	UGGSceneWidget* GetCurrentScene() const;
+	int32 GetSceneStackCount() const;
 
 private:
 	void OnCloseAnimationFinished(UGGSceneWidget* closedScene);

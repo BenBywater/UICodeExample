@@ -5,6 +5,7 @@
 #include "GGHUDSceneWidget.generated.h"
 
 class UGGProgressBarWidget;
+class UTextBlock;
 
 
 UCLASS(Abstract)
@@ -14,7 +15,15 @@ class UICODEEXAMPLE_API UGGHUDSceneWidget : public UGGSceneWidget
 public:
 	virtual void SetDataContext(UGGViewModel* inViewModel) override;
 
+	// Define some functions just used for testing
+
+	float GetHealth() const;
+	float GetAmmo() const;
+
 private:
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget, AllowPrivateAccess))
 	UGGProgressBarWidget* healthBarWidget = nullptr;
+
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget, AllowPrivateAccess))
+	UTextBlock* ammoCountText = nullptr;
 };

@@ -28,3 +28,8 @@ void UGGProgressBarWidget::BlueprintTick(float InDeltaTime)
 		}
 	}
 }
+
+float UGGProgressBarWidget::GetProgressValue() const
+{
+	return currentPercentage;
+}

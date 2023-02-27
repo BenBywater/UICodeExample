@@ -45,6 +45,7 @@ void UGGSceneManager::OpenScene(SceneEnum scene, UUISceneDataPayload* sceneDataP
 		}
 		
 	}
+	// Log Error
 }
 
 void UGGSceneManager::CloseScene()
@@ -53,4 +54,34 @@ void UGGSceneManager::CloseScene()
 	{
 		sceneManager->PopScene();
 	}
+	// Log Error
+}
+
+void UGGSceneManager::CloseAllScenes()
+{
+	if (sceneManager)
+	{
+		sceneManager->PopAllScenes();
+	}
+	// Log Error
+}
+
+UGGSceneWidget* UGGSceneManager::GetCurrentSceneWidget() const
+{
+	if (sceneManager)
+	{
+		return sceneManager->GetCurrentScene();
+	}
+	// Log Error
+	return nullptr;
+}
+
+int32 UGGSceneManager::GetSceneStackCount() const
+{
+	if (sceneManager)
+	{
+		return sceneManager->GetSceneStackCount();
+	}
+
+	return 0;
 }

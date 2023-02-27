@@ -35,6 +35,29 @@ void UGGSceneManagerWidget::PopScene()
 	}
 }
 
+void UGGSceneManagerWidget::PopAllScenes()
+{
+	for (UGGSceneWidget* scene : SceneStack)
+	{
+		SceneLayer->RemoveChild(scene);
+	}
+	SceneStack.Empty();
+}
+
+UGGSceneWidget* UGGSceneManagerWidget::GetCurrentScene() const
+{
+	if (SceneStack.Num() > 0)
+	{
+		return SceneStack.Top();
+	}
+	return nullptr;
+}
+
+int32 UGGSceneManagerWidget::GetSceneStackCount() const
+{
+	return SceneStack.Num();
+}
+
 void UGGSceneManagerWidget::OnCloseAnimationFinished(UGGSceneWidget* closedScene)
 {
 	SceneLayer->RemoveChild(closedScene);
