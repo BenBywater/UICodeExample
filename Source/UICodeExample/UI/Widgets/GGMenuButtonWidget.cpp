@@ -9,7 +9,7 @@ bool UGGMenuButtonWidget::Initialize()
 
 	if (button)
 	{
-		button->OnClicked.AddUniqueDynamic(this, &ThisClass::OnButtonClicked);
+		button->OnClicked.AddDynamic(this, &ThisClass::OnButtonClicked);
 	}
 
 	return true;

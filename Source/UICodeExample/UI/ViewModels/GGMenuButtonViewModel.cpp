@@ -1,5 +1,6 @@
 #include "GGMenuButtonViewModel.h"
 #include "UICodeExample/UI/Data/UIMenuButtonData.h"
+#include "UICodeExample/PlayerController/GGPlayerController.h"
 
 void UGGMenuButtonViewModel::InitializeViewModel(FUIMenuButtonData const & data)
 {
@@ -11,5 +12,15 @@ void UGGMenuButtonViewModel::InitializeViewModel(FUIMenuButtonData const & data)
 
 void UGGMenuButtonViewModel::OnButtonClicked()
 {
-	// buttonID
+	UWorld* world = GetWorld();
+	AGGPlayerController* playerController = Cast<AGGPlayerController>(world->GetFirstPlayerController());
+
+	if (playerController)
+	{
+		playerController->OnMainMenuCommand(buttonID);
+	}
+	else
+	{
+		// log error
+	}
 }

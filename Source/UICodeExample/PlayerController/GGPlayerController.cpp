@@ -3,6 +3,9 @@
 #include <UICodeExample/UI/Data/UIMenuButtonData.h>
 #include <UICodeExample/UI/Helpers/GGUIHelpers.h>
 #include <UICodeExample/UI/Data/UIMainMenuScenePayload.h>
+#include <UICodeExample/UI/Data/UIHUDScenePayload.h>
+#include <UICodeExample/UI/Data/UISceneDataPayload.h>
+#include <Kismet/KismetSystemLibrary.h>
 
 void AGGPlayerController::PlayerTakeDamage()
 {
@@ -35,4 +38,36 @@ void AGGPlayerController::OpenMainMenu()
 		// Log Error
 	}
 	// Log Error
+}
+
+void AGGPlayerController::OnMainMenuCommand(FString command)
+{
+	if (command == "EnterMap")
+	{
+		UWorld* world = GetWorld();
+
+		// Close Main Menu
+		UIHelpers::CloseScene(world);
+
+		UUIHUDScenePayload* hudPayload = NewObject<UUIHUDScenePayload>();
+		if (hudPayload)
+		{
+			hudPayload->Health = 1.f;
+			hudPayload->AmmoCount = 10.f;
+			UIHelpers::OpenScene(world, SceneEnum::HUD, hudPayload);
+		}
+	}
+	else if (command == "OpenSettings")
+	{
+		UWorld* world = GetWorld();
+		UUISceneDataPayload* payload = NewObject<UUISceneDataPayload>();
+		if (world && payload)
+		{
+			UIHelpers::OpenScene(world, SceneEnum::Placeholder, payload);
+		}
+	}
+	else if (command == "CloseGame")
+	{
+		UKismetSystemLibrary::QuitGame(this, nullptr, EQuitPreference::Quit, false);
+	}
 }

@@ -28,6 +28,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void OpenMainMenu();
 
+	void OnMainMenuCommand(FString command);
+
 private:
 	float playerHealth = 1.f;
 	float playerAmmoCount = 10.f;
