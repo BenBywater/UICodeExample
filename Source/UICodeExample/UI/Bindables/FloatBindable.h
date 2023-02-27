@@ -1,22 +1,18 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "UObject/Object.h"
 #include "FloatBindable.generated.h"
 
 class UTextBlock;
 
-UCLASS(BlueprintType)
-class UICODEEXAMPLE_API UFloatBindable : public UObject
+USTRUCT(BlueprintType)
+struct UICODEEXAMPLE_API FFloatBindable
 {
 	GENERATED_BODY()
 
 public:
-	UFloatBindable() = default;
-
 	void operator = (float inValue);
 
-	UFUNCTION(BlueprintCallable)
 	void SetFloatDataBinding(UTextBlock* inTextBlock);
 
 private:

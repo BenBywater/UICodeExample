@@ -14,17 +14,14 @@ void UGGHUDSceneViewModel::InitializeSceneViewModel(UUISceneDataPayload* scenePa
 
 	if (hudPayload == nullptr)
 	{
+		// Log Error
 		return;
 	}
 
-	ammoBinding = NewObject<UFloatBindable>(this);
 
 	healthBarViewModel = NewObject<UGGProgressBarViewModel>(this);
 
-	if (ammoBinding != nullptr)
-	{
-		*ammoBinding = hudPayload->AmmoCount;
-	}
+	ammoBinding = hudPayload->AmmoCount;
 
 	if (AGGPlayerController* playerController = GetPlayerController<AGGPlayerController>())
 	{
@@ -48,10 +45,7 @@ void UGGHUDSceneViewModel::UpdatePlayerHealth(float newHealth)
 
 void UGGHUDSceneViewModel::UpdatePlayerAmmoCount(float newAmmo)
 {
-	if (ammoBinding != nullptr)
-	{
-		*ammoBinding = newAmmo;
-	}
+	ammoBinding = newAmmo;
 }
 
 UGGProgressBarViewModel* UGGHUDSceneViewModel::GetHealthBarViewModel() const

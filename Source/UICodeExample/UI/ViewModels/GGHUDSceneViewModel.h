@@ -2,10 +2,10 @@
 
 #include "CoreMinimal.h"
 #include "GGSceneViewModel.h"
+#include "UICodeExample/UI/Bindables/FloatBindable.h"
 #include "GGHUDSceneViewModel.generated.h"
 
 class UUISceneDataPayload;
-class UFloatBindable;
 class UGGProgressBarViewModel;
 
 UCLASS(BlueprintType)
@@ -23,7 +23,7 @@ public:
 
 private:
 	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
-	UFloatBindable* ammoBinding;
+	FFloatBindable ammoBinding;
 
 	UPROPERTY()
 	UGGProgressBarViewModel* healthBarViewModel = nullptr;

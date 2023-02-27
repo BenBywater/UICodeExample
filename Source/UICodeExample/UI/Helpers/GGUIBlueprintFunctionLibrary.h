@@ -5,7 +5,6 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "GGUIBlueprintFunctionLibrary.generated.h"
 
-class UFloatBindable;
 class UTextBlock;
 struct FProgressBarBindable;
 class UGGProgressBarWidget;
@@ -23,7 +22,7 @@ public:
     static void CloseScene(UObject* WorldContextObject);
 
     UFUNCTION(BlueprintCallable, Category="Bindables")
-    static void BindFloatBindable(UFloatBindable* inBinding, UTextBlock* inTextBlock);
+    static void BindFloatBindable(UPARAM(ref)FFloatBindable& inBinding, UTextBlock* inTextBlock);
 
     UFUNCTION(BlueprintCallable, Category="Bindables")
     static void BindProgressBarBindable(UPARAM(ref)FProgressBarBindable& inBinding, UGGProgressBarWidget* inProgressBar);

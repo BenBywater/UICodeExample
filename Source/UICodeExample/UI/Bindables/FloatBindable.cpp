@@ -3,19 +3,19 @@
 #include "Internationalization/Text.h"
 
 
-void UFloatBindable::operator=(float inValue)
+void FFloatBindable::operator=(float inValue)
 {
 	currentValue = inValue;
 	UpdateBidning();
 }
 
-void UFloatBindable::SetFloatDataBinding(UTextBlock* inTextBlock)
+void FFloatBindable::SetFloatDataBinding(UTextBlock* inTextBlock)
 {
 	textBlock = inTextBlock;
 	UpdateBidning();
 }
 
-void UFloatBindable::UpdateBidning()
+void FFloatBindable::UpdateBidning()
 {
 	if (textBlock)
 	{
