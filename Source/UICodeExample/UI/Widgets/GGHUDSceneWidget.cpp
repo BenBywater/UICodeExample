@@ -24,6 +24,10 @@ float UGGHUDSceneWidget::GetHealth() const
 	{
 		return healthBarWidget->GetProgressValue();
 	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("healthBarWidget is nullptr. Widget is not bound."));
+	}
 
 	return -1.f;
 }
@@ -33,6 +37,10 @@ float UGGHUDSceneWidget::GetAmmo() const
 	if (ammoCountText)
 	{
 		return FCString::Atof(*ammoCountText->GetText().ToString());
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("ammoCountText is nullptr. Widget is not bound."));
 	}
 	return -1.f;
 }

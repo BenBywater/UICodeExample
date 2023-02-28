@@ -21,6 +21,6 @@ void UGGMenuButtonViewModel::OnButtonClicked()
 	}
 	else
 	{
-		// log error
+		UE_LOG(LogTemp, Warning, TEXT("Player Controller nullptr"));
 	}
 }

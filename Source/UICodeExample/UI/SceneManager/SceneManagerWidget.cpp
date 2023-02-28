@@ -15,7 +15,7 @@ void UGGSceneManagerWidget::PushScene(UGGSceneWidget* newScene)
 	}
 	else
 	{
-		// Log Error
+		UE_LOG(LogTemp, Warning, TEXT("newScene or SceneLayer are nullptr. Could not add newScene to viewport"));
 	}
 	
 }
@@ -32,13 +32,13 @@ void UGGSceneManagerWidget::PopScene()
 			}
 			else
 			{
-				// Log Error
+				UE_LOG(LogTemp, Warning, TEXT("Could not get SceneLayers first child scene"));
 			}
 		}
 	}
 	else
 	{
-		// Log Error
+		UE_LOG(LogTemp, Warning, TEXT("SceneLayer is nullptr, unable to exit scene"));
 	}
 }
 
@@ -50,7 +50,7 @@ void UGGSceneManagerWidget::PopAllScenes()
 	}
 	else
 	{
-		// log error
+		UE_LOG(LogTemp, Warning, TEXT("SceneLayer is nullptr, Could not remove all scenes"));
 	}
 
 }
@@ -64,7 +64,7 @@ UGGSceneWidget* UGGSceneManagerWidget::GetCurrentScene() const
 			return Cast<UGGSceneWidget>(SceneLayer->GetChildAt(0));
 		}
 	}
-	// lorg error
+	UE_LOG(LogTemp, Warning, TEXT("SceneLayer is nullptr, Could not get current scenes"));
 	return nullptr;
 }
 
@@ -75,7 +75,7 @@ int32 UGGSceneManagerWidget::GetSceneStackCount() const
 		return SceneLayer->GetChildrenCount();
 	}
 
-	// log error
+	UE_LOG(LogTemp, Warning, TEXT("SceneLayer is nullptr, Could not get scenes count"));
 	return -1;
 }
 
@@ -85,11 +85,11 @@ void UGGSceneManagerWidget::OnCloseAnimationFinished(UGGSceneWidget* closedScene
 	{
 		if (!SceneLayer->RemoveChild(closedScene))
 		{
-			//Log Error
+			UE_LOG(LogTemp, Warning, TEXT("Could not remove child from Scene Layer"));
 		}
 	}
 	else
 	{
-		// log error
+		UE_LOG(LogTemp, Warning, TEXT("SceneLayer is nullptr, Could not remove child from Scene Layer"));
 	}
 }

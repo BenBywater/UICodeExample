@@ -27,6 +27,10 @@ bool UGGSceneWidget::Initialize()
 			playerController->SetShowMouseCursor(false);
 		}
 	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("PlayerController nullptr, cannot set input mode "));
+	}
 
 	return parentInit;
 }

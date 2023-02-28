@@ -12,7 +12,7 @@ class UICODEEXAMPLE_API UGGSceneViewModel : public UGGViewModel
 	GENERATED_BODY()
 
 public:
-	virtual void InitializeSceneViewModel(UUISceneDataPayload* scenePayload);
+	virtual void InitializeSceneViewModel(UUISceneDataPayload* scenePayload) {};
 
 protected:
 	template <typename T>

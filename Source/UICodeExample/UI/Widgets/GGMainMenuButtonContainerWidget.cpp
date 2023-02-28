@@ -24,6 +24,6 @@ void UGGMainMenuButtonContainerWidget::OnChildAddedToPanel(UPanelSlot* childSlot
 	}
 	else
 	{
-		// Log Error	
+		UE_LOG(LogTemp, Warning, TEXT("Could not convert widget slot to vertical box slot"));
 	}
 }

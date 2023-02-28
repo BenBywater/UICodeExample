@@ -11,7 +11,10 @@ void UGGMainMenuSceneViewModel::InitializeSceneViewModel(UUISceneDataPayload* sc
 	{
 		ContainerViewModel->InitializeViewModel(mainMenuScenePayload->menuButtonData);
 	}
-	// Log Error
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Could cast payload to MainMenuScenePayload"));
+	}
 }
 
 UGGMainMenuButtonContainerViewModel* UGGMainMenuSceneViewModel::GetContainerViewModel() const

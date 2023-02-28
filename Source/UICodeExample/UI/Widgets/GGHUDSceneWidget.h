@@ -15,8 +15,6 @@ class UICODEEXAMPLE_API UGGHUDSceneWidget : public UGGSceneWidget
 public:
 	virtual void SetDataContext(UGGViewModel* inViewModel) override;
 
-	// Define some functions just used for testing
-
 	float GetHealth() const;
 	float GetAmmo() const;
 

@@ -10,33 +10,34 @@ void UGGHUDSceneViewModel::InitializeSceneViewModel(UUISceneDataPayload* scenePa
 {
 	Super::InitializeSceneViewModel(scenePayload);
 
-	UUIHUDScenePayload* hudPayload = Cast<UUIHUDScenePayload>(scenePayload);
-
-	if (hudPayload == nullptr)
+	if (UUIHUDScenePayload* hudPayload = Cast<UUIHUDScenePayload>(scenePayload))
 	{
-		// Log Error
-		return;
-	}
+		
 
-	if (healthBarViewModel == nullptr)
+		if (healthBarViewModel == nullptr)
+		{
+			healthBarViewModel = NewObject<UGGProgressBarViewModel>(this);
+		}
+
+		ammoBinding = hudPayload->AmmoCount;
+
+		if (AGGPlayerController* playerController = GetPlayerController<AGGPlayerController>())
+		{
+			playerController->HealthResourceChangedDelegate.BindUObject(this, &ThisClass::UpdatePlayerHealth);
+			playerController->AmmoResourceChangedDelegate.BindUObject(this, &ThisClass::UpdatePlayerAmmoCount);
+		}
+
+		if (healthBarViewModel)
+		{
+			healthBarViewModel->UpdateProgressBar(hudPayload->Health);
+		}
+
+		playerDiedBinding = ESlateVisibility::Collapsed;
+	}
+	else
 	{
-		healthBarViewModel = NewObject<UGGProgressBarViewModel>(this);
+		UE_LOG(LogTemp, Warning, TEXT("Could cast payload to HUDScenePayload"));
 	}
-
-	ammoBinding = hudPayload->AmmoCount;
-
-	if (AGGPlayerController* playerController = GetPlayerController<AGGPlayerController>())
-	{
-		playerController->HealthResourceChangedDelegate.BindUObject(this, &ThisClass::UpdatePlayerHealth);
-		playerController->AmmoResourceChangedDelegate.BindUObject(this, &ThisClass::UpdatePlayerAmmoCount);
-	}
-
-	if (healthBarViewModel)
-	{
-		healthBarViewModel->UpdateProgressBar(hudPayload->Health);
-	}
-
-	playerDiedBinding = ESlateVisibility::Collapsed;
 }
 
 void UGGHUDSceneViewModel::UpdatePlayerHealth(float newHealth)

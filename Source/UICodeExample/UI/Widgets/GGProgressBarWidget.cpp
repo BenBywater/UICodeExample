@@ -10,6 +10,10 @@ void UGGProgressBarWidget::SetProgressBar(float inPercentage)
 	{
 		material->SetScalarParameterValue("FirstBar", currentPercentage);
 	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Could not get dynamic material from progress bar"));
+	}
 }
 
 void UGGProgressBarWidget::BlueprintTick(float InDeltaTime)
@@ -26,6 +30,10 @@ void UGGProgressBarWidget::BlueprintTick(float InDeltaTime)
 			float lerpVal = FMath::Lerp(currentSecondBar, currentPercentage, InDeltaTime * lerpMultiplyer);
 			material->SetScalarParameterValue("SecondBar", lerpVal);
 		}
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Could not get dynamic material from progress bar"));
 	}
 }
 
