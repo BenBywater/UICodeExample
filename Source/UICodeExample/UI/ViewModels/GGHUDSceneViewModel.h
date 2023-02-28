@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "GGSceneViewModel.h"
 #include "UICodeExample/UI/Bindables/FloatBindable.h"
+#include "../Bindables/VisibilityBindable.h"
 #include "GGHUDSceneViewModel.generated.h"
 
 class UUISceneDataPayload;
@@ -24,6 +25,9 @@ public:
 private:
 	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	FFloatBindable ammoBinding;
+
+	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	FVisibilityBindable playerDiedBinding;
 
 	UPROPERTY()
 	UGGProgressBarViewModel* healthBarViewModel = nullptr;

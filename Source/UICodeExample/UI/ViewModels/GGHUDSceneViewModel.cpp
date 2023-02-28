@@ -18,8 +18,10 @@ void UGGHUDSceneViewModel::InitializeSceneViewModel(UUISceneDataPayload* scenePa
 		return;
 	}
 
-
-	healthBarViewModel = NewObject<UGGProgressBarViewModel>(this);
+	if (healthBarViewModel == nullptr)
+	{
+		healthBarViewModel = NewObject<UGGProgressBarViewModel>(this);
+	}
 
 	ammoBinding = hudPayload->AmmoCount;
 
@@ -33,6 +35,8 @@ void UGGHUDSceneViewModel::InitializeSceneViewModel(UUISceneDataPayload* scenePa
 	{
 		healthBarViewModel->UpdateProgressBar(hudPayload->Health);
 	}
+
+	playerDiedBinding = ESlateVisibility::Collapsed;
 }
 
 void UGGHUDSceneViewModel::UpdatePlayerHealth(float newHealth)
@@ -40,6 +44,11 @@ void UGGHUDSceneViewModel::UpdatePlayerHealth(float newHealth)
 	if (healthBarViewModel != nullptr)
 	{
 		healthBarViewModel->UpdateProgressBar(newHealth);
+	}
+
+	if (newHealth <= 0.f)
+	{
+		playerDiedBinding = ESlateVisibility::SelfHitTestInvisible;
 	}
 }
 
