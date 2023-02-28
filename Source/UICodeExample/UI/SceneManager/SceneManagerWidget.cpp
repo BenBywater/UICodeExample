@@ -11,8 +11,6 @@ void UGGSceneManagerWidget::PushScene(UGGSceneWidget* newScene)
 		UCanvasPanelSlot* sceneSlot = SceneLayer->AddChildToCanvas(newScene);
 		sceneSlot->SetAnchors(FAnchors(0, 0, 1, 1));
 		sceneSlot->SetOffsets(FMargin(0, 0, 0, 0));
-		SceneStack.Push(newScene);
-
 		newScene->EnterScene();
 	}
 	else
@@ -24,9 +22,9 @@ void UGGSceneManagerWidget::PushScene(UGGSceneWidget* newScene)
 
 void UGGSceneManagerWidget::PopScene()
 {
-	if (SceneStack.Num() > 0)
+	if (SceneLayer->GetChildrenCount() > 0)
 	{
-		if (UGGSceneWidget* scene = SceneStack.Top())
+		if (UGGSceneWidget* scene = Cast<UGGSceneWidget>(SceneLayer->GetChildAt(0)))
 		{
 			scene->ExitScene();
 		}
@@ -39,18 +37,14 @@ void UGGSceneManagerWidget::PopScene()
 
 void UGGSceneManagerWidget::PopAllScenes()
 {
-	for (UGGSceneWidget* scene : SceneStack)
-	{
-		SceneLayer->RemoveChild(scene);
-	}
-	SceneStack.Empty();
+	SceneLayer->ClearChildren();
 }
 
 UGGSceneWidget* UGGSceneManagerWidget::GetCurrentScene() const
 {
-	if (SceneStack.Num() > 0)
+	if (SceneLayer->GetChildrenCount() > 0)
 	{
-		return SceneStack.Top();
+		return Cast<UGGSceneWidget>(SceneLayer->GetChildAt(0));
 	}
 	return nullptr;
 }
@@ -62,11 +56,8 @@ int32 UGGSceneManagerWidget::GetSceneStackCount() const
 
 void UGGSceneManagerWidget::OnCloseAnimationFinished(UGGSceneWidget* closedScene)
 {
-	if (SceneLayer->RemoveChild(closedScene))
+	if (!SceneLayer->RemoveChild(closedScene))
 	{
-		SceneStack.RemoveAt(0);
-		
+		//Log Error
 	}
-	//Log Error
-	
 }

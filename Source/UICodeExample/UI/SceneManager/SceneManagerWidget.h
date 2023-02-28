@@ -22,14 +22,11 @@ private:
 	void OnCloseAnimationFinished(UGGSceneWidget* closedScene);
 
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget, AllowPrivateAccess))
-	class UCanvasPanel* SceneLayer;
+	UCanvasPanel* SceneLayer;
 
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget, AllowPrivateAccess))
-	class UCanvasPanel* PopupLayer;
+	UCanvasPanel* PopupLayer;
 
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget, AllowPrivateAccess))
-	class UCanvasPanel* ToolTipLayer;
-
-	UPROPERTY()
-	TArray<UGGSceneWidget*> SceneStack;
+	UCanvasPanel* ToolTipLayer;
 };

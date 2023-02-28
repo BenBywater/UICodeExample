@@ -51,8 +51,8 @@ void AGGPlayerController::OnMainMenuCommand(FString command)
 	{
 		UWorld* world = GetWorld();
 
-		// Close Main Menu
-		UIHelpers::CloseScene(world);
+		// Remove all scenes as we are leaving the front end
+		UIHelpers::CloseAllScenes(world);
 
 		UUIHUDScenePayload* hudPayload = NewObject<UUIHUDScenePayload>();
 		if (hudPayload)

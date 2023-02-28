@@ -16,13 +16,14 @@ FReply UGGTitleMenuSceneWidget::NativeOnKeyDown(const FGeometry& InGeometry, con
 {
 	Super::NativeOnKeyDown(InGeometry, InKeyEvent);
 
+	ExitScene();
+
 	UWorld* world = GetWorld();
 	AGGPlayerController* playerController = Cast<AGGPlayerController>(world->GetFirstPlayerController());
 	if (playerController)
 	{
 		playerController->OpenMainMenu();
 	}
-	ExitScene();
 	return FReply::Handled();
 }
 
