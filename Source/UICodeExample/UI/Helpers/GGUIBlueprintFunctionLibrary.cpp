@@ -2,11 +2,6 @@
 #include <Engine/World.h>
 #include <Components/TextBlock.h>
 #include "GGUIHelpers.h"
-#include "UICodeExample/UI/Bindables/FloatBindable.h"
-#include "UICodeExample/UI/Bindables/ProgressBarBindable.h"
-#include "UICodeExample/UI/Widgets/GGProgressBarWidget.h"
-#include "UICodeExample/UI/Bindables/TextBindable.h"
-
 
 void UGGUIBlueprintFunctionLibrary::OpenScene(UObject* WorldContextObject, SceneEnum scene, UUISceneDataPayload* sceneDataPayload)
 {
@@ -50,4 +45,13 @@ void UGGUIBlueprintFunctionLibrary::BindProgressBarBindable(FProgressBarBindable
 		inBinding.SetProgressBarBinding(inProgressBar);
 	}
 	//Log Error
+}
+
+void UGGUIBlueprintFunctionLibrary::BindVisibilityBindable(FVisibilityBindable& inBinding, UWidget* inWidget)
+{
+	if (inWidget)
+	{
+		inBinding.SetVisibilityBinding(inWidget);
+	}
+	//Log Erro
 }

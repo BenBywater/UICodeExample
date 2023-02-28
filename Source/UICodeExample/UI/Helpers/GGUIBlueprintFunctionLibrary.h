@@ -3,10 +3,13 @@
 #include "CoreMinimal.h"
 #include "UICodeExample/UI/Data/SceneEnums.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "UICodeExample/UI/Bindables/VisibilityBindable.h"
+#include "UICodeExample/UI/Bindables/ProgressBarBindable.h"
+#include "UICodeExample/UI/Bindables/TextBindable.h"
+#include "UICodeExample/UI/Bindables/FloatBindable.h"
 #include "GGUIBlueprintFunctionLibrary.generated.h"
 
 class UTextBlock;
-struct FProgressBarBindable;
 class UGGProgressBarWidget;
 
 UCLASS()
@@ -29,4 +32,7 @@ public:
 
     UFUNCTION(BlueprintCallable, Category="Bindables")
     static void BindProgressBarBindable(UPARAM(ref)FProgressBarBindable& inBinding, UGGProgressBarWidget* inProgressBar);
+
+    UFUNCTION(BlueprintCallable, Category="Bindables")
+    static void BindVisibilityBindable(UPARAM(ref)FVisibilityBindable& inBinding, UWidget* inWidget);
 };
