@@ -13,6 +13,10 @@ void UGGHUDSceneViewModel::InitializeSceneViewModel(UUISceneDataPayload* scenePa
 	if (UUIHUDScenePayload* hudPayload = Cast<UUIHUDScenePayload>(scenePayload))
 	{
 		
+		// Here could be a good opportunity to cache a TWeakPtr of a game play object.
+		// For example, if we wanted to show UI of a pawn in the world, we would want
+		// to own a weak pointer of that object as to not have ownership of it for when
+		// its despawned from the world
 
 		if (healthBarViewModel == nullptr)
 		{
