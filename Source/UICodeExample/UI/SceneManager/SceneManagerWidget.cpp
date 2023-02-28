@@ -22,42 +22,74 @@ void UGGSceneManagerWidget::PushScene(UGGSceneWidget* newScene)
 
 void UGGSceneManagerWidget::PopScene()
 {
-	if (SceneLayer->GetChildrenCount() > 0)
+	if (SceneLayer != nullptr)
 	{
-		if (UGGSceneWidget* scene = Cast<UGGSceneWidget>(SceneLayer->GetChildAt(0)))
+		if (SceneLayer->GetChildrenCount() > 0)
 		{
-			scene->ExitScene();
+			if (UGGSceneWidget* scene = Cast<UGGSceneWidget>(SceneLayer->GetChildAt(0)))
+			{
+				scene->ExitScene();
+			}
+			else
+			{
+				// Log Error
+			}
 		}
-		else
-		{
-			// Log Error
-		}
+	}
+	else
+	{
+		// Log Error
 	}
 }
 
 void UGGSceneManagerWidget::PopAllScenes()
 {
-	SceneLayer->ClearChildren();
+	if (SceneLayer != nullptr)
+	{
+		SceneLayer->ClearChildren();
+	}
+	else
+	{
+		// log error
+	}
+
 }
 
 UGGSceneWidget* UGGSceneManagerWidget::GetCurrentScene() const
 {
-	if (SceneLayer->GetChildrenCount() > 0)
+	if (SceneLayer != nullptr)
 	{
-		return Cast<UGGSceneWidget>(SceneLayer->GetChildAt(0));
+		if (SceneLayer->GetChildrenCount() > 0)
+		{
+			return Cast<UGGSceneWidget>(SceneLayer->GetChildAt(0));
+		}
 	}
+	// lorg error
 	return nullptr;
 }
 
 int32 UGGSceneManagerWidget::GetSceneStackCount() const
 {
-	return SceneStack.Num();
+	if (SceneLayer != nullptr)
+	{
+		return SceneLayer->GetChildrenCount();
+	}
+
+	// log error
+	return -1;
 }
 
 void UGGSceneManagerWidget::OnCloseAnimationFinished(UGGSceneWidget* closedScene)
 {
-	if (!SceneLayer->RemoveChild(closedScene))
+	if (SceneLayer != nullptr)
 	{
-		//Log Error
+		if (!SceneLayer->RemoveChild(closedScene))
+		{
+			//Log Error
+		}
+	}
+	else
+	{
+		// log error
 	}
 }

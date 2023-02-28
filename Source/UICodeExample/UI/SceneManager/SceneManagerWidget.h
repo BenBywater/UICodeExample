@@ -5,6 +5,7 @@
 #include "SceneManagerWidget.generated.h"
 
 class UGGSceneWidget;
+class UCanvasPanel;
 
 UCLASS()
 class UICODEEXAMPLE_API UGGSceneManagerWidget : public UUserWidget
