@@ -35,7 +35,7 @@ void UGGCollectionPanelWidget::ConstructCollectionWidgets(TArray<T*> arrayList)
 {
 	if (panelWidget == nullptr)
 	{
-		// Log Error
+		UE_LOG(LogTemp, Warning, TEXT("Panel widget is nullptr. Cannot create child widgets"));
 		return;
 	}
 

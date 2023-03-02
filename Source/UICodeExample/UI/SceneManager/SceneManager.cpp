@@ -17,7 +17,7 @@ void UGGSceneManager::InitialiseSceneManagerWidget(TSubclassOf<UGGSceneManagerWi
 	}
 	else
 	{
-		// Log Error
+		UE_LOG(LogTemp, Warning, TEXT("Scene Manager nullptr"));
 	}
 }
 
@@ -45,7 +45,6 @@ void UGGSceneManager::OpenScene(SceneEnum scene, UUISceneDataPayload* sceneDataP
 		}
 		
 	}
-	// Log Error
 }
 
 void UGGSceneManager::CloseScene()
@@ -54,7 +53,11 @@ void UGGSceneManager::CloseScene()
 	{
 		sceneManager->PopScene();
 	}
-	// Log Error
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Scene Manager nullptr"));
+	}
+	
 }
 
 void UGGSceneManager::CloseAllScenes()
@@ -63,7 +66,10 @@ void UGGSceneManager::CloseAllScenes()
 	{
 		sceneManager->PopAllScenes();
 	}
-	// Log Error
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Scene Manager nullptr"));
+	}
 }
 
 UGGSceneWidget* UGGSceneManager::GetCurrentSceneWidget() const
@@ -72,7 +78,8 @@ UGGSceneWidget* UGGSceneManager::GetCurrentSceneWidget() const
 	{
 		return sceneManager->GetCurrentScene();
 	}
-	// Log Error
+
+	UE_LOG(LogTemp, Warning, TEXT("Scene Manager nullptr"));
 	return nullptr;
 }
 
@@ -83,5 +90,6 @@ int32 UGGSceneManager::GetSceneStackCount() const
 		return sceneManager->GetSceneStackCount();
 	}
 
+	UE_LOG(LogTemp, Warning, TEXT("Scene Manager nullptr"));
 	return 0;
 }

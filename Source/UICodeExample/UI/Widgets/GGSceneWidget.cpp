@@ -55,15 +55,15 @@ void UGGSceneWidget::EnterScene()
 	if (EnterSceneAnimation != nullptr)
 	{
 		PlayAnimation(EnterSceneAnimation);
-
-		if (DefaultFocusWidget != nullptr)
-		{
-			DefaultFocusWidget->SetKeyboardFocus();
-		}
 	}
 	else
 	{
 		EnterAnimationFinishedDelegate.Broadcast(this);
+	}
+
+	if (DefaultFocusWidget != nullptr)
+	{
+		DefaultFocusWidget->SetKeyboardFocus();
 	}
 }
 

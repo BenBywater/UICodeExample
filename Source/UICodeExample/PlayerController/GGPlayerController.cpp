@@ -40,7 +40,14 @@ void AGGPlayerController::OpenMainMenu()
 			payload->menuButtonData = data->menuButtonData;
 			UIHelpers::OpenScene(GetWorld(), SceneEnum::MainMenu, payload);
 		}
-		// Log Error
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Button Data or payload were nullptr. Cannot open main menu"));
+		}
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Button Data or payload were nullptr. Cannot open main menu"));
 	}
 	// Log Error
 }
@@ -57,8 +64,8 @@ void AGGPlayerController::OnMainMenuCommand(FString command)
 		UUIHUDScenePayload* hudPayload = NewObject<UUIHUDScenePayload>();
 		if (hudPayload)
 		{
-			hudPayload->Health = 1.f;
-			hudPayload->AmmoCount = 10.f;
+			hudPayload->Health = playerHealth;
+			hudPayload->AmmoCount = playerAmmoCount;
 			UIHelpers::OpenScene(world, SceneEnum::HUD, hudPayload);
 		}
 	}
