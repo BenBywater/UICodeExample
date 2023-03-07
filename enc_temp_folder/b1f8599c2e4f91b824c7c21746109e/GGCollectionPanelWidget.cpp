@@ -17,7 +17,7 @@ void UGGCollectionPanelWidget::InitializeWidget(UGGUserWidget* childWidget, UGGV
 		return;
 	}
 
-	if (childWidget == nullptr)
+	if (childWidget)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("childWidget is nullptr. Cannot set Data Context"));
 		return;
