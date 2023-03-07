@@ -19,6 +19,7 @@ public:
 
 private:
 	UGGUserWidget* GetPooledWidget();
+	void InitializeWidget(UGGUserWidget* childWidget, UGGViewModel* childViewModel);
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget, AllowPrivateAccess = "true"))
 	UPanelWidget* panelWidget = nullptr;
@@ -51,16 +52,14 @@ void UGGCollectionPanelWidget::ConstructCollectionWidgets(TArray<T*> arrayList)
 				// if we can get a cached widget from the widget pool
 				if (childWidget != nullptr)
 				{
-					childWidget->SetDataContext(childViewModel);
-					OnChildAddedToPanel(panelWidget->AddChild(childWidget));
+					InitializeWidget(childWidget, childViewModel);
 				}
 				else
 				{
 					childWidget = CreateWidget<UGGUserWidget>(this, childWidgetClass);
 					if (childWidget != nullptr)
 					{
-						childWidget->SetDataContext(childViewModel);
-						OnChildAddedToPanel(panelWidget->AddChild(childWidget));
+						InitializeWidget(childWidget, childViewModel);
 					}
 				}
 			}
@@ -88,8 +87,7 @@ void UGGCollectionPanelWidget::ConstructCollectionWidgets(TArray<T*> arrayList)
 				UGGUserWidget* childWidget = Cast<UGGUserWidget>(panelWidget->GetChildAt(Index));
 				if (childWidget != nullptr)
 				{
-					childWidget->SetDataContext(childViewModel);
-					OnChildAddedToPanel(panelWidget->AddChild(childWidget));
+					InitializeWidget(childWidget, childViewModel);
 				}
 				else
 				{
@@ -97,8 +95,7 @@ void UGGCollectionPanelWidget::ConstructCollectionWidgets(TArray<T*> arrayList)
 					childWidget = GetPooledWidget();
 					if (childWidget != nullptr)
 					{
-						childWidget->SetDataContext(childViewModel);
-						OnChildAddedToPanel(panelWidget->AddChild(childWidget));
+						InitializeWidget(childWidget, childViewModel);
 					}
 					// else we need to create a brand new object
 					else 
@@ -106,8 +103,7 @@ void UGGCollectionPanelWidget::ConstructCollectionWidgets(TArray<T*> arrayList)
 						childWidget = CreateWidget<UGGUserWidget>(this, childWidgetClass);
 						if (childWidget)
 						{
-							childWidget->SetDataContext(childViewModel);
-							OnChildAddedToPanel(panelWidget->AddChild(childWidget));
+							InitializeWidget(childWidget, childViewModel);
 						}
 					}
 				}
