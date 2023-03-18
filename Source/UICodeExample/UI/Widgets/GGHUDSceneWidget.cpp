@@ -1,7 +1,7 @@
 #include "GGHUDSceneWidget.h"
 #include "UICodeExample/UI/ViewModels/GGHUDSceneViewModel.h"
+#include "UICodeExample/UI/ViewModels/GGProgressBarViewModel.h"
 #include "GGProgressBarWidget.h"
-#include "../ViewModels/GGProgressBarViewModel.h"
 #include <Components/TextBlock.h>
 
 void UGGHUDSceneWidget::SetDataContext(UGGViewModel* inViewModel)
