@@ -1,5 +1,5 @@
 #include "GGPlaceholderSceneWidget.h"
-#include "Components/Button.h"
+#include "GGButton.h"
 
 bool UGGPlaceholderSceneWidget::Initialize()
 {
@@ -7,7 +7,7 @@ bool UGGPlaceholderSceneWidget::Initialize()
 
 	if (button)
 	{
-		button->OnClicked.AddDynamic(this, &ThisClass::OnButtonClicked);
+		button->OnClickedDelegate.AddDynamic(this, &ThisClass::OnButtonClicked);
 	}
 
 	return true;

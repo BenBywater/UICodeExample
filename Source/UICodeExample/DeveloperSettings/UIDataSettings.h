@@ -6,6 +6,7 @@
 #include <UICodeExample/UI/SceneManager/SceneManagerWidget.h>
 #include <UICodeExample/UI/Data/UISceneData.h>
 #include <UICodeExample/UI/Data/UIMenuButtonData.h>
+#include <UICodeExample/UI/Data/UIButtonStylesData.h>
 #include "UIDataSettings.generated.h"
 
 UCLASS(Config = Game, defaultconfig, meta = (DisplayName = "UI Data"))
@@ -23,4 +24,7 @@ public:
 
 	UPROPERTY(Config, EditAnywhere, BlueprintReadOnly, Category = "UI|MainMenu")
 	TSoftObjectPtr<UUIMainMenuButtonData> UIMenuButtonData;
+
+	UPROPERTY(Config, EditAnywhere, BlueprintReadOnly, Category = "UI|Buttons")
+	TSoftObjectPtr<UUIButtonStylesData> UIButtonStylesData;
 };

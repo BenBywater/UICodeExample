@@ -4,7 +4,7 @@
 #include "UICodeExample/UI/Widgets/GGSceneWidget.h"
 #include "GGPlaceholderSceneWidget.generated.h"
 
-class UButton;
+class UGGButton;
 
 UCLASS(Abstract)
 class UICODEEXAMPLE_API UGGPlaceholderSceneWidget : public UGGSceneWidget
@@ -19,6 +19,6 @@ private:
 	void OnButtonClicked();
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget, AllowPrivateAccess = "true"))
-	UButton* button = nullptr;
+	UGGButton* button = nullptr;
 
 };

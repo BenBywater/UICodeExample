@@ -5,6 +5,9 @@
 #include "GGButton.generated.h"
 
 class UTexture;
+struct FUIButtonStyle;
+class UImage;
+class UOverlay;
 
 // Represent the states of the button through a enum bit mask
 // This will allow up to know if multiple states are true at once
@@ -19,6 +22,10 @@ enum class EButtonStates : uint8
 	Deactivated = 1 << 4,
 };
 ENUM_CLASS_FLAGS(EButtonStates);
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnButtonClickedDelegate);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnButtonFocusedDelegate);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnButtonHoverDelegate);
 
 UCLASS(Abstract)
 class UICODEEXAMPLE_API UGGButton : public UUserWidget
@@ -37,7 +44,24 @@ public:
 	void EnableButton();
 	void DisableButton();
 
+	UPROPERTY(BlueprintAssignable, Category="Button|Delegate")
+	FOnButtonClickedDelegate OnClickedDelegate;
+
+	UPROPERTY(BlueprintAssignable, Category="Button|Delegate")
+	FOnButtonFocusedDelegate OnFocusedDelegate;
+
+	UPROPERTY(BlueprintAssignable, Category="Button|Delegate")
+	FOnButtonFocusedDelegate OnLostFocusedDelegate;
+
+	UPROPERTY( BlueprintAssignable, Category = "Button|Delegate" )
+	FOnButtonHoverDelegate OnHoveredDelegate;
+
+	UPROPERTY( BlueprintAssignable, Category = "Button|Delegate" )
+	FOnButtonHoverDelegate OnUnhoveredDelegate;
+
 protected:
+	virtual void SynchronizeProperties() override;
+
 	virtual FReply NativeOnFocusReceived(const FGeometry& InGeometry, const FFocusEvent& InFocusEvent);
 	virtual void NativeOnFocusLost(const FFocusEvent& InFocusEvent);
 	virtual void NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
@@ -51,5 +75,32 @@ private:
 	void SetButtonBitMask(EButtonStates bitmask);
 	void ClearButtonBitMask(EButtonStates bitmask);
 
+	void SetButtonTextures();
+	void SetButtonLayout();
+	void UpdateButtonStyle();
+
 	int32 currentBitMask = 0;
+
+	FUIButtonStyle* currentButtonStyle;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Button Style|Layout", meta = (AllowprivateAccess = "true"))
+	FString ButtonStyleName;
+
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget, AllowPrivateAccess))
+	UImage* defaultTexture = nullptr;
+
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget, AllowPrivateAccess))
+	UImage* hoveredTexture = nullptr;
+
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget, AllowPrivateAccess))
+	UImage* focusedTexture = nullptr;
+
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget, AllowPrivateAccess))
+	UImage* selectedTexture = nullptr;
+
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget, AllowPrivateAccess))
+	UImage* deactiveTexture = nullptr;
+
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget, AllowPrivateAccess))
+	UOverlay* contentOverlay = nullptr;
 };
