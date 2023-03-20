@@ -36,7 +36,7 @@ public:
 	virtual bool Initialize() override;
 
 	UFUNCTION(BlueprintCallable)
-	bool IsBitMaskMatch(UPARAM(meta = (Bitmask, BitmaskEnum = EButtonStates)) int32 bitmask);
+	bool IsBitMaskMatch(UPARAM(meta = (Bitmask, BitmaskEnum = "/Script/GGButton.EButtonStates")) int32 bitmask);
 
 	UFUNCTION(BlueprintImplementableEvent, meta = (BlueprintProtected))
 	void OnBitMaskStateChanged();

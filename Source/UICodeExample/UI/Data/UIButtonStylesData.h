@@ -32,10 +32,10 @@ public:
 	FMargin ContentPadding;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Button Style|Layout")
-	TEnumAsByte<EHorizontalAlignment> ContentHorizontalAlignment;
+	TEnumAsByte<EHorizontalAlignment> ContentHorizontalAlignment = EHorizontalAlignment::HAlign_Fill;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Button Style|Layout")
-	TEnumAsByte < EVerticalAlignment> ContentVerticalAlignment;
+	TEnumAsByte <EVerticalAlignment> ContentVerticalAlignment = EVerticalAlignment::VAlign_Fill;
 };
 
 
