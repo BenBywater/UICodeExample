@@ -5,6 +5,8 @@
 #include "UICodeExample/UI/Data/UIHUDScenePayload.h"
 #include "UICodeExample/UI/Helpers/GGUIHelpers.h"
 #include "UICodeExample/UI/Widgets/GGHUDSceneWidget.h"
+#include "UICodeExample/UI/Widgets/GGMainMenuSceneWidget.h"
+#include "UICodeExample/UI/ViewModels/GGMenuButtonViewModel.h"
 
 UWorld* GetTestWorld()
 {
@@ -126,6 +128,38 @@ bool FUIUnitTest_HUDInit::RunTest(const FString& Parameters)
 			bool isAmmoCorrect = hudScene->GetAmmo() == 10;
 
 			return (isHealthCorrect && isAmmoCorrect);
+		}
+	}
+	return false;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FUIUnitTest_CollectionPanelWidget_WidgetPool, "UICodeExample.UI.CollectionPanelWidget_WidgetPool", EAutomationTestFlags::EditorContext | EAutomationTestFlags::ProductFilter)
+
+bool FUIUnitTest_CollectionPanelWidget_WidgetPool::RunTest(const FString& Parameters)
+{
+	BeforeEachTestSetup();
+
+	UWorld* world = GetTestWorld();
+	if (const UUIDataSettings* uiDataSettings = GetDefault<UUIDataSettings>())
+	{
+		UUIMainMenuButtonData* data = uiDataSettings->UIMenuButtonData.LoadSynchronous();
+		UUIMainMenuScenePayload* payload = NewObject<UUIMainMenuScenePayload>();
+		if (payload && data)
+		{
+			payload->menuButtonData = data->menuButtonData;
+			UIHelpers::OpenScene(world, SceneEnum::MainMenu, payload);
+		}
+
+		UGGSceneWidget* currentScene = UIHelpers::GetCurrentSceneWidget(world);
+		if (UGGMainMenuSceneWidget* mainMenuScene = Cast<UGGMainMenuSceneWidget>(currentScene))
+		{
+			TArray<UGGMenuButtonViewModel*> ButtonViewModels;
+			if (UGGMenuButtonViewModel* ButtonViewModel = NewObject<UGGMenuButtonViewModel>())
+			{
+				ButtonViewModels.Add(ButtonViewModel);
+				mainMenuScene->UpdateButtonContainerWidget(ButtonViewModels);
+				return mainMenuScene->GetMenuButtonCount() == ButtonViewModels.Num();
+			}
 		}
 	}
 	return false;

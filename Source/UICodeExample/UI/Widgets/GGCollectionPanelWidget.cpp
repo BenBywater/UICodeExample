@@ -1,5 +1,16 @@
 #include "GGCollectionPanelWidget.h"
 
+int32 UGGCollectionPanelWidget::GetChildrenCount() const
+{
+	if (panelWidget)
+	{
+		return panelWidget->GetChildrenCount();;
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT("panelWidget is nullptr. Cannot return child count of panel widget."));
+	return 0;
+}
+
 UGGUserWidget* UGGCollectionPanelWidget::GetPooledWidget()
 {
 	if (widgetPool.Num() > 0)

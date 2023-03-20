@@ -17,6 +17,8 @@ public:
 
 	virtual void OnChildAddedToPanel(UPanelSlot* childSlot) {};
 
+	int32 GetChildrenCount() const;
+
 private:
 	UGGUserWidget* GetPooledWidget();
 	void InitializeWidget(UGGUserWidget* childWidget, UGGViewModel* childViewModel);
@@ -69,10 +71,10 @@ void UGGCollectionPanelWidget::ConstructCollectionWidgets(TArray<T*> arrayList)
 	{
 		
 		// Check to see if any widgets need to be removed from panel
-		int removalDiff = arrayList.Num() - panelWidget->GetChildrenCount();
+		int removalDiff = panelWidget->GetChildrenCount() - arrayList.Num();
 		if (removalDiff > 0)
 		{
-			for (int32 Index = removalDiff; Index < panelWidget->GetChildrenCount(); ++Index)
+			for (int32 Index = 0; Index < removalDiff; ++Index)
 			{
 				panelWidget->RemoveChildAt(Index);
 			}
