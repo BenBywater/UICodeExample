@@ -37,11 +37,18 @@ void UGGSceneManager::OpenScene(SceneEnum scene, UUISceneDataPayload* sceneDataP
 			TSubclassOf<class UGGSceneViewModel> sceneViewModelClass = sceneTypeData->sceneViewModelType;
 
 			UGGSceneViewModel* newSceneViewModel = NewObject<UGGSceneViewModel>(GetWorld(), sceneViewModelClass);
-			newSceneViewModel->InitializeSceneViewModel(sceneDataPayload);
-
 			UGGSceneWidget* newScene = CreateWidget<UGGSceneWidget>(GetWorld(), sceneWidgetClass);
-			newScene->SetDataContext(newSceneViewModel);
-			sceneManager->PushScene(newScene);
+			
+			if (newSceneViewModel && newScene)
+			{
+				newSceneViewModel->InitializeSceneViewModel(sceneDataPayload);
+				newScene->SetDataContext(newSceneViewModel);
+				sceneManager->PushScene(newScene);
+			}
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("newSceneViewModel or newScene were nullptr. Cannot add new scene to scene manager widget."));
+			}
 		}
 		
 	}
