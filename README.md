@@ -55,6 +55,7 @@ UICodeExample\Source\UICodeExample\UI\Widgets\GGCollectionPanelWidget.h
 UICodeExample\Source\UICodeExample\UI\Widgets\GGProgressBarWidget.cpp
 UICodeExample\Source\UICodeExample\UI\Widgets\GGProgressBarWidget.h
 UICodeExample\Content\UI\Generic\M_StackedBar.uasset
+UICodeExample\Screenshots\ProgressBarMaterial.png
 
 ## Unit Tests
 UICodeExample\Source\UICodeExample\Unit Tests\GGUIUnitTests.cpp
