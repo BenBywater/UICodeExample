@@ -13,7 +13,7 @@ class UICODEEXAMPLE_API UGGCollectionPanelWidget : public UGGUserWidget
 	GENERATED_BODY()
 public:
 	template <typename T>
-	void ConstructCollectionWidgets(TArray<T*> arrayList);
+	void ConstructCollectionWidgets(TArray<T*> const& arrayList);
 
 	virtual void OnChildAddedToPanel(UPanelSlot* childSlot) {};
 
@@ -30,11 +30,11 @@ private:
 	TSubclassOf<class UGGUserWidget> childWidgetClass = nullptr;
 
 	UPROPERTY()
-	TArray<UUserWidget*> widgetPool;
+	TArray<UGGUserWidget*> widgetPool;
 };
 
 template <typename T>
-void UGGCollectionPanelWidget::ConstructCollectionWidgets(TArray<T*> arrayList)
+void UGGCollectionPanelWidget::ConstructCollectionWidgets(TArray<T*> const & arrayList)
 {
 	if (panelWidget == nullptr)
 	{
@@ -76,6 +76,7 @@ void UGGCollectionPanelWidget::ConstructCollectionWidgets(TArray<T*> arrayList)
 		{
 			for (int32 Index = 0; Index < removalDiff; ++Index)
 			{
+				widgetPool.Add(Cast<UGGUserWidget>(panelWidget->GetChildAt(Index)));
 				panelWidget->RemoveChildAt(Index);
 			}
 		}
